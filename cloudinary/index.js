@@ -18,27 +18,44 @@ export async function uploadImage(imagePath) {
   };
 
   try {
+    const image = {
+      oldImage: {},
+      optimizedImage: {},
+    };
+
     const result = await cloudinary.uploader.upload(imagePath, options);
+
     const { public_id: publicId, format, bytes, url } = result;
-    console.log(result);
-    await optimizeImage(publicId);
-    return result.public_id;
+    const resultOptimizedImage = await optimizeImage(publicId);
+
+    image.oldImage = { publicId, format, bytes, url };
+    image.optimizedImage = { ...resultOptimizedImage };
+
+    return image;
   } catch (error) {
     console.error(error);
   }
 }
 
 export async function optimizeImage(public_id) {
-  const imageOptimize = cloudinary.image(public_id, {
+  const optimizedImage = cloudinary.image(public_id, {
     transformation: [
       { quality: "auto" },
-      { fetch_format: "auto" },
+      { secure: true },
+      { fetch_format: "webp" },
       { flags: "lossy" },
       { dpr: "auto" },
     ],
   });
 
-  console.log(imageOptimize);
+  const [urlImageWithQuotation] = optimizedImage.match(/'.+'/);
+  const urlOptimizedImage = urlImageWithQuotation.replaceAll("'", "");
+
+  const result = await cloudinary.uploader.upload(urlOptimizedImage);
+
+  const { public_id: publicId, format, bytes, url } = result;
+
+  return { public_id: publicId, format, bytes, url };
 }
 
 uploadImage(
