@@ -1,7 +1,9 @@
+---
+import Form from "../components/Form";
+import Layout from "../layouts/Layout.astro"
 
-<form action="#">
-  <label for="page">Pagina</label>
-  <input type="text" id="for">
+---
 
-  <button>Enviar</button>
-</form>
+<Layout title="index">
+  <Form client:load/>
+</Layout>
