@@ -10,13 +10,13 @@ cloudinary.config({
   secure: true,
 });
 
-export async function uploadImage(imagePath) {
-  const options = {
-    use_filename: true,
-    unique_filename: false,
-    overwrite: true,
-  };
+const options = {
+  use_filename: true,
+  unique_filename: false,
+  overwrite: true,
+};
 
+export async function uploadImage(imagePath) {
   try {
     const image = {
       oldImage: {},
@@ -30,6 +30,8 @@ export async function uploadImage(imagePath) {
 
     image.oldImage = { publicId, format, bytes, url };
     image.optimizedImage = { ...resultOptimizedImage };
+
+    console.log(image);
 
     return image;
   } catch (error) {
@@ -51,16 +53,21 @@ export async function optimizeImage(public_id) {
   const [urlImageWithQuotation] = optimizedImage.match(/'.+'/);
   const urlOptimizedImage = urlImageWithQuotation.replaceAll("'", "");
 
-  const result = await cloudinary.uploader.upload(urlOptimizedImage);
+  const result = await cloudinary.uploader.upload(urlOptimizedImage, {
+    overwrite: true,
+    public_id: `${public_id}-optimized`,
+  });
 
   const { public_id: publicId, format, bytes, url } = result;
 
   return { public_id: publicId, format, bytes, url };
 }
 
-uploadImage(
-  "https://www.freecodecamp.org/news/content/images/size/w2000/2022/06/How-to-Build-a-Weather-Application-using-React--14-.png"
-);
+// uploadImage(
+//   "https://www.freecodecamp.org/news/content/images/size/w2000/2022/06/How-to-Build-a-Weather-Application-using-React--14-.png"
+// );
+
+// uploadImage("https://playwright.dev/img/playwright-logo.svg");
 
 const getAssetInfo = async (publicId) => {
   // Return colors in the response
@@ -71,8 +78,7 @@ const getAssetInfo = async (publicId) => {
   try {
     // Get details about the asset
     const result = await cloudinary.api.resource(publicId, options);
-    console.log(result);
-    return result.colors;
+    return result;
   } catch (error) {
     console.error(error);
   }
