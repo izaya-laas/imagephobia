@@ -9,7 +9,7 @@ export default function Form() {
 
     if (url === "") return console.error("URL Vacia");
 
-    const xd = await fetch(`http://localhost:8080/prueba`, {
+    const response = await fetch(`http://localhost:8080/prueba`, {
       method: "POST",
       headers: {
         "Content-Length": 0,
@@ -18,27 +18,24 @@ export default function Form() {
       body: url,
     }).then((res) => res.json());
 
-    console.log(xd);
+    console.log(response);
   };
 
   return (
     <form
-      className="flex flex-col items-center gap-y-2 w-60 mx-auto bg-[#0f172a] py-2 px-4 mt-6 rounded-md text-white"
+      className="flex font-code items-center gap-y-2 w-full max-w-xl mx-auto rounded-md text-white border"
       onSubmit={sendData}
     >
-      <label className="text-sm" htmlFor="page">
-        Pon la URL de una pagina web
-      </label>
       <input
-        className="w-full block rounded-sm text-sm px-2 py-1 text-black"
-        placeholder="https://tupagina.com"
+        className="block w-full py-4 rounded-l-sm text-2xl text-[#1d1d1d] text-center placeholder:text-[#dadce0] focus:outline-none"
+        placeholder="find website"
         type="text"
         id="for"
         value={valuePage}
         onChange={(e) => (valuePage.value = e.target.value)}
       />
-      <button className="px-2 py-1 bg-sky-400 font-bold block w-full rounded-sm">
-        Buscar
+      <button className="block px-4 py-4 border-l rounded-r-sm font-bold">
+        <img className="w-6" src="/public/find.svg" alt="find icon" />
       </button>
     </form>
   );
