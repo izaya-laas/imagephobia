@@ -1,9 +1,15 @@
 ---
 import Form from "../components/Form";
+import Logo from "../components/Logo.astro";
+import Main from "../components/Main.astro";
 import Layout from "../layouts/Layout.astro"
 
 ---
 
 <Layout title="index">
-  <Form client:load/>
+  <Main>
+    <Logo/>
+    <p class="font-indie mt-2 mb-4 text-2xl text-[#949494] text-center tracking-wider">find the cost of adding non-optimized images on your website</p>
+    <Form client:load/>
+  </Main>
 </Layout>
