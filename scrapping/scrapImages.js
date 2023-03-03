@@ -1,33 +1,48 @@
-import playwright from "playwright";
+import { chromium } from "playwright";
 
-export async function scrapImages() {
-  const browser = await playwright.chromium.launch({
+export async function scrapImages(urlPage) {
+  const browser = await chromium.launch({
     headless: false,
   });
-
   const page = await browser.newPage();
 
-  await page.goto("https://oxylabs.io/blog/playwright-web-scraping");
+  try {
+    const { origin } = new URL(urlPage);
 
-  const imagesData = await page.$$eval("img", (images) => {
-    const data = [];
+    await page.goto(urlPage);
 
-    images.forEach((image) => {
-      if (image.style.display === "none") return;
+    await page.waitForLoadState("load");
+    await page.waitForTimeout(4000);
 
-      const currentUrlImage = image.getAttribute("src");
-      console.log(currentUrlImage);
-      data.push(currentUrlImage);
+    const imagesData2 = await page.$$eval("img", (images) => {
+      const data = [];
+      images.forEach((image) => {
+        if (image.style.display === "none") return;
+
+        image.scrollIntoView();
+        let currentUrlImage = image.getAttribute("src");
+
+        if (!currentUrlImage) return;
+
+        if (!currentUrlImage.includes("http"))
+          currentUrlImage = `${origin}${currentUrlImage}`;
+
+        data.push(currentUrlImage);
+      });
+
+      return data;
     });
 
-    return data;
-  });
+    await page.close();
+    return imagesData2;
+  } catch (e) {
+    await page.close();
 
-  await page.close();
-
-  // const image = await fetch(`https://playwright.dev${imagesData[0]}`);
-
-  return imagesData;
+    return {
+      name: "Error on scrap images, the website don't respond",
+      status: 400,
+    };
+  }
 }
 
 //Crear memes - Crear avatares - optimizar imagenes - optimizador de imagenes en paginas web - generar miniaturas para  youtube
