@@ -1,11 +1,12 @@
 import express from "express";
 import cors from "cors";
 import { scrapImages } from "../scrapping/scrapImages.js";
+import { uploadImages } from "../cloudinary/uploadImages.js";
+import { cleanDuplicateUrls } from "../helpers/cleanDuplicateUrls.js";
+import { validateURL } from "../helpers/validateUrl.js";
 
 const app = express();
 const port = 8080;
-
-console.log(cors());
 
 app.use(
   express.urlencoded({
@@ -21,21 +22,44 @@ app.use(
 
 app.use(cors());
 
-app.get("/prueba/:url", (req, res) => {
-  res.send("Hola, estoy funcionando");
-  console.log("xd funciona get");
+app.post("/prueba", async (req, res) => {
+  try {
+    const urlPage = req.body;
+    console.log(urlPage);
+    const resultValidate = validateURL(urlPage);
 
-  const { url } = req.params;
+    if (!resultValidate) {
+      throw { name: "URL BAD", status: 400 };
+    }
 
-  console.log(url);
+    console.log("Escrapeamos imagenes");
+    const arrayImages = await scrapImages(urlPage);
+
+    if (arrayImages?.status) {
+      const { name, status } = arrayImages;
+      throw { name, status };
+    }
+
+    const arrayImagesFilteredDuplicates = cleanDuplicateUrls(arrayImages);
+
+    console.log("Subiendo imagenes");
+    const images = await uploadImages(arrayImagesFilteredDuplicates);
+    return res.send(images);
+  } catch (e) {
+    const { name, status } = e;
+    console.log(e);
+
+    res.statusMessage = name;
+    return res.status(status).send();
+  }
 });
 
-app.post("/prueba", async (req, res) => {
-  console.log("xd funciona post");
-
-  console.log(req.body);
-  const images = await scrapImages();
-  res.send(images);
+app.use((err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(err.status || 500);
+  res.json({ error: err.message });
 });
 
 app.listen(port, () => {
