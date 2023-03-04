@@ -22,6 +22,16 @@ export async function uploadImage(imagePath) {
     image.oldImage = { publicId, format, bytes, url };
     image.optimizedImage = { ...resultOptimizedImage };
 
+    if (image.oldImage.bytes < image.optimizedImage.bytes) {
+      const { publicId: publicIdOld } = image.oldImage;
+      const { publicId: publicIdOptimized } = image.optimizedImage;
+
+      await cloudinary.uploader.destroy(publicIdOld);
+      await cloudinary.uploader.destroy(publicIdOptimized);
+
+      return null;
+    }
+
     return image;
   } catch (error) {
     console.error(error);

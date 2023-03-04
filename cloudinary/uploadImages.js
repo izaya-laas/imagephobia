@@ -5,6 +5,9 @@ export async function uploadImages(arrayImages) {
 
   for (let i = 0; i < arrayImages.length; i++) {
     const currentImage = await uploadImage(arrayImages[i]);
+
+    if (!currentImage) continue;
+
     data.push(currentImage);
   }
 
