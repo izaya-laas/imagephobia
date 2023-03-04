@@ -7,7 +7,7 @@ export default function ImagesResponse({ images }) {
   const imagesOptimized = images.map((image) => image.optimizedImage);
 
   return (
-    <section>
+    <section className="pb-20">
       <h3 className="text-center text-lg font-code font-bold mt-4 mb-2">
         We found <span className="text-[#1a73e8]">{images.length}</span>{" "}
         unoptimized images
