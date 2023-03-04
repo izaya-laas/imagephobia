@@ -8,7 +8,7 @@ export default function CardImage({
   return (
     <div className="flex items-center justify-between w-full h-12 border px-2 py-2 text-xs sm:text-sm overflow-hidden">
       <div className="w-1/4">
-        <img className="h-full" src={url} alt="Bubble" />
+        <img className="h-10 w-auto" src={url} alt="Bubble" />
       </div>
       <div className="flex items-center justify-center w-full mx-4">
         <p className="hidden sm:block w-10">{kilobytesOld}kb</p>
