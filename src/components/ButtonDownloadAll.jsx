@@ -24,7 +24,7 @@ export default function ButtonDownloadAll({ images }) {
   return (
     <button
       onClick={() => dowloadImages(images)}
-      className="block mb-8 bg-black py-1 px-2 w-32 sm:w-48 rounded-lg mx-auto text-white font-code"
+      className="block mb-8 bg-black py-1 px-2 w-32 sm:w-48 rounded-lg mx-auto text-white font-code text-sm sm:text-base"
     >
       Download All
     </button>
