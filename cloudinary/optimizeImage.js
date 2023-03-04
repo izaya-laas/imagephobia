@@ -21,5 +21,5 @@ export async function optimizeImage(public_id) {
 
   const { public_id: publicId, format, bytes, url } = result;
 
-  return { public_id: publicId, format, bytes, url };
+  return { publicId, format, bytes, url };
 }
