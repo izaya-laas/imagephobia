@@ -12,7 +12,7 @@ export default function CardImage({
       </div>
       <div className="flex items-center justify-center w-full">
         <p className="hidden sm:block w-10">{kilobytesOld}kb</p>
-        <div className="py-1 px-2 w-32 sm:w-48 rounded-lg mx-2 bg-[#1a73e8]">
+        <div className="py-1 px-2 w-32 sm:w-48 rounded-lg mx-6 bg-[#1a73e8]">
           <p className="text-center text-white text-sm sm:text-base">
             Finished
           </p>
