@@ -6,7 +6,7 @@ export default function CardImage({
   percentajeInFavor,
 }) {
   return (
-    <div className="flex items-center justify-between w-full h-12 border px-2 py-2 text-xs sm:text-sm overflow-hidden font-code">
+    <div className="flex items-center justify-between w-full h-12 border px-2 py-2 text-xs sm:text-sm overflow-hidden font-code bg-white">
       <div className="w-1/4 flex justify-center">
         <img className="h-10 w-auto object-contain" src={url} alt="Bubble" />
       </div>

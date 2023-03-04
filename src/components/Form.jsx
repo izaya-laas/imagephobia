@@ -72,7 +72,7 @@ export default function Form({ setResponse }) {
   return (
     <>
       <form
-        className="flex font-code items-center gap-y-2 w-full max-w-xl mx-auto rounded-md text-white border"
+        className="flex font-code items-center gap-y-2 w-full max-w-xl mx-auto rounded-md text-white border bg-white"
         onSubmit={(e) => sendData(e, setResponse)}
       >
         <input
