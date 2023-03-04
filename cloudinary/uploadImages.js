@@ -3,13 +3,15 @@ import { uploadImage } from "./uploadImage.js";
 export async function uploadImages(arrayImages) {
   const data = [];
 
-  for (let i = 0; i < arrayImages.length; i++) {
-    const currentImage = await uploadImage(arrayImages[i]);
+  const promises = arrayImages.map(async (image) => {
+    const currentImage = await uploadImage(image);
 
-    if (!currentImage) continue;
+    if (!currentImage) return;
 
     data.push(currentImage);
-  }
+  });
+
+  await Promise.all(promises);
 
   return data;
 }
