@@ -25,6 +25,7 @@ export default function Form({ setResponse }) {
   const sendData = async (e, setResponse) => {
     e.preventDefault();
     setResponse(null);
+    setError(null);
 
     const url = formData;
     const options = {
@@ -39,10 +40,7 @@ export default function Form({ setResponse }) {
     setError(responseValidation);
 
     if (responseValidation) {
-      setTimeout(() => {
-        setError(null);
-      }, 5000);
-
+      setError({ name: "The URL entered is not correct", status: 500 });
       return;
     }
 
@@ -66,16 +64,9 @@ export default function Form({ setResponse }) {
         const error = { name: statusText, status };
 
         setError(error);
-
-        setTimeout(() => {
-          setError(null);
-        }, 5000);
       });
 
     setIsLoading(false);
-    // setResponse(response);
-
-    // console.log(response);
   };
 
   return (
