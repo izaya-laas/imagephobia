@@ -8,6 +8,9 @@ module.exports = {
         indie: ["Amatic SC", "cursive"],
         code: ["Source Code Pro", "monospace"],
       },
+      backgroundImage: {
+        pattern: "url('/public/patterns/geometry.png')",
+      },
     },
   },
   plugins: [],
