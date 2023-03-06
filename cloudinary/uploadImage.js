@@ -7,7 +7,7 @@ const options = {
   overwrite: true,
 };
 
-export async function uploadImage(imagePath) {
+export async function uploadImage(imagePath, config) {
   try {
     const image = {
       oldImage: {},
@@ -17,7 +17,7 @@ export async function uploadImage(imagePath) {
     const result = await cloudinary.uploader.upload(imagePath, options);
 
     const { public_id: publicId, format, bytes, url } = result;
-    const resultOptimizedImage = await optimizeImage(publicId);
+    const resultOptimizedImage = await optimizeImage(publicId, config);
 
     image.oldImage = { publicId, format, bytes, url };
     image.optimizedImage = { ...resultOptimizedImage };

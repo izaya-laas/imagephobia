@@ -26,6 +26,7 @@ export default function Form({ setResponse }) {
     e.preventDefault();
     setResponse(null);
     setError(null);
+    const ieCompatibility = localStorage.getItem("ieCompatibility");
 
     const url = formData;
     const options = {
@@ -46,7 +47,10 @@ export default function Form({ setResponse }) {
 
     setIsLoading(true);
 
-    await fetch(`http://localhost:8080/prueba`, options)
+    await fetch(
+      `http://localhost:8080/prueba?ieCompatibility=${ieCompatibility}`,
+      options
+    )
       .then((res) => {
         console.log(res);
 

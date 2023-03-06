@@ -1,11 +1,15 @@
 import { cloudinary } from "./index.js";
 
-export async function optimizeImage(public_id) {
+export async function optimizeImage(public_id, config) {
+  const { ieCompatibility } = config;
+
+  const formatOptimize = ieCompatibility === "true" ? "png" : "webp";
+
   const optimizedImage = cloudinary.image(public_id, {
     transformation: [
       { quality: "auto" },
       { secure: true },
-      { fetch_format: "webp" },
+      { fetch_format: formatOptimize },
       { flags: "lossy" },
       { dpr: "auto" },
     ],
