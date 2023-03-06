@@ -25,7 +25,11 @@ app.use(cors());
 app.post("/prueba", async (req, res) => {
   try {
     const urlPage = req.body;
+    const config = req.query;
+
     console.log(urlPage);
+    console.log(config);
+
     const resultValidate = validateURL(urlPage);
 
     if (!resultValidate) {
@@ -43,7 +47,7 @@ app.post("/prueba", async (req, res) => {
     const arrayImagesFilteredDuplicates = cleanDuplicateUrls(arrayImages);
 
     console.log("Subiendo imagenes");
-    const images = await uploadImages(arrayImagesFilteredDuplicates);
+    const images = await uploadImages(arrayImagesFilteredDuplicates, config);
     return res.send(images);
   } catch (e) {
     const { name, status } = e;
