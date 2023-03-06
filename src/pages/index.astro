@@ -1,4 +1,5 @@
 ---
+import Config from "../components/Config";
 import Logo from "../components/Logo.astro";
 import Main from "../components/Main.astro";
 import WorkSection from "../components/WorkSection";
@@ -9,6 +10,7 @@ import Layout from "../layouts/Layout.astro"
   <Main>
     <Logo/>
     <p class="font-indie mt-2 mb-4 text-2xl text-[#949494] text-center tracking-wider">find the cost of adding non-optimized images on your website</p>
+    <Config client:load/>
     <WorkSection client:load/>
   </Main>
 </Layout>

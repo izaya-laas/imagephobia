@@ -5,7 +5,6 @@ specifiers:
   '@astrojs/react': 2.0.2
   '@astrojs/tailwind': 3.0.1
   '@nanostores/preact': ^0.3.1
-  '@preact/signals': 1.1.3
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
   astro: 2.0.14
@@ -25,7 +24,6 @@ dependencies:
   '@astrojs/react': 2.0.2_angt2zzx4qatp7n7jdjnew4h4u
   '@astrojs/tailwind': 3.0.1_4v5kdpyftkos3zk3fp33tnvxba
   '@nanostores/preact': 0.3.1_feodnntbtwy42mztdi35gk5qza
-  '@preact/signals': 1.1.3_preact@10.6.5
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
   astro: 2.0.14
@@ -3044,7 +3042,7 @@ packages:
       http-proxy-agent: 4.0.1
       https-proxy-agent: 5.0.1
       pac-resolver: 5.0.1
-      raw-body: 2.5.1
+      raw-body: 2.5.2
       socks-proxy-agent: 5.0.1
     transitivePeerDependencies:
       - supports-color
@@ -3368,6 +3366,17 @@ packages:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
     dev: false
+
+  /raw-body/2.5.2:
+    resolution: {integrity: sha512-8zGqypfENjCIqGhgXToC8aB2r7YrBX+AQAfIPs/Mlk+BtPTztOvTS01NRW/3Eh60J+a48lt8qsCzirQ6loCVfA==}
+    engines: {node: '>= 0.8'}
+    dependencies:
+      bytes: 3.1.2
+      http-errors: 2.0.0
+      iconv-lite: 0.4.24
+      unpipe: 1.0.0
+    dev: false
+    optional: true
 
   /readable-stream/1.1.14:
     resolution: {integrity: sha512-+MeVjFf4L44XUkhM1eYbD8fyEsxcV81pqMSR5gblfcLCHfZvbrqy4/qYHE+/R5HoBUT11WV5O08Cr1n3YXkWVQ==}
