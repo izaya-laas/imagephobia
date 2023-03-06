@@ -7,7 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "astro dev",
-    "start": "astro build && nodemon/api/api.js",
+    "start": "concurrently \"npm run start-api\" \"npm run start-web\"",
+    "start-api": "nodemon api/api.js",
+    "start-web": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -20,6 +22,7 @@
     "@astrojs/tailwind": "3.0.1",
     "astro": "2.0.14",
     "cloudinary": "1.34.0",
+    "concurrently": "^7.6.0",
     "cors": "2.8.5",
     "dotenv": "16.0.3",
     "express": "4.18.2",
