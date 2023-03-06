@@ -22,6 +22,8 @@ Comando: `pnpm run start` || `npm run start`
 
 Ya una vez ejecutado podremos verlo [aquí](http://localhost:3000/)
 
+Tranquilos por el .env jaja al terminar, borrare las keys.
+
 ### Tecnologias usadas
 
 - [Preact](https://preactjs.com/): Utilizo preact para maquetar todo lo que es la interfaz y llevar la logica de los estados.
