@@ -6,7 +6,15 @@
 
 Es muy posible que tengas más de una imagen no optimizada que genere un mal rendimiento para tu sitio web.
 
-**IMAGEPHOBIA** es una aplicación en la que colocaras la URL de un sitio web, y automáticamente optimizara todas las imágenes sin perder _calidad visual_ y siéndole indiferente el _formato_ de la imagen.
+**IMAGEPHOBIA** es una aplicación simple y minimalista en la que colocaras la URL de un sitio web, y automáticamente optimizara todas las imágenes sin perder _calidad visual_ y siéndole indiferente el _formato_ de la imagen.
+
+### **Busca y optimiza al maximo pagina**
+
+![Inicio](./public/readme/run.webp)
+
+### **Soporte para IE incluido, ¡Activalo!**
+
+![Inicio](./public/readme/config.webp)
 
 ---
 
@@ -20,9 +28,13 @@ No logre encontrar la forma de ejecutar mi código front y back de forma gratuit
 
 Comando: `pnpm run start` || `npm run start`
 
-Ya una vez ejecutado podremos verlo [aquí](http://localhost:3000/)
+**IMPORTANTE:** Es necesarior que agregues en un .env donde coloques los siguientes datos
 
-Tranquilos por el .env jaja al terminar, borrare las keys.
+- CLOUDINARY_CLOUD_NAME
+- CLOUDINARY_API_KEY
+- CLOUDINARY_API_SECRET
+
+Ya una vez ejecutado podremos verlo [aquí](http://localhost:3000/)
 
 ### Tecnologias usadas
 
