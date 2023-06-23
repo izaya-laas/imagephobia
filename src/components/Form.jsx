@@ -3,24 +3,12 @@ import { validateURL } from "../../helpers/validateUrl";
 import Error from "./Error";
 import Loading from "./Loading";
 
-const validationURL = (url) => {
-  if (url === "") {
-    return "You need to add a page";
-  }
-
-  if (!validateURL(url)) {
-    return "The url page is not corrrect";
-  }
-
-  return null;
-};
+const API_URL = "http://localhost:8080/prueba";
 
 export default function Form({ setResponse }) {
   const [formData, setFormData] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log(error);
 
   const sendData = async (e, setResponse) => {
     e.preventDefault();
@@ -29,6 +17,19 @@ export default function Form({ setResponse }) {
     const ieCompatibility = localStorage.getItem("ieCompatibility");
 
     const url = formData;
+    //validamos url
+    const responseValidation = validateURL(url);
+
+    if (!responseValidation) {
+      setError({ name: "The URL entered is not correct", status: 500 });
+
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+
+      return;
+    }
+
     const options = {
       method: "POST",
       headers: {
@@ -37,43 +38,15 @@ export default function Form({ setResponse }) {
       },
       body: url,
     };
-    const responseValidation = validationURL(url);
-    setError(responseValidation);
-
-    if (responseValidation) {
-      setError({ name: "The URL entered is not correct", status: 500 });
-
-      //Ojo
-      setTimeout(() => {
-        setError(null);
-      }, 5000);
-
-      return;
-    }
 
     setIsLoading(true);
 
-    await fetch(
-      `http://localhost:8080/prueba?ieCompatibility=${ieCompatibility}`,
-      options
-    )
-      .then((res) => {
-        console.log(res);
-
-        return res.ok ? res.json() : Promise.reject(res);
-      })
-      .then(async (json) => {
-        console.log("BIEN");
-        console.log(json);
-        setResponse(json);
-      })
+    await fetch(`${API_URL}?ieCompatibility=${ieCompatibility}`, options)
+      .then((res) => (res.ok ? res.json() : Promise.reject(res)))
+      .then((json) => setResponse(json))
       .catch((err) => {
-        console.log("ERROR");
-        
         const { statusText, status } = err;
-        const error = { name: statusText, status };
-
-        setError(error);
+        setError({ name: statusText, status });
       });
 
     setIsLoading(false);
