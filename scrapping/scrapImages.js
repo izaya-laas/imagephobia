@@ -44,9 +44,3 @@ export async function scrapImages(urlPage) {
     };
   }
 }
-
-//Crear memes - Crear avatares - optimizar imagenes - optimizador de imagenes en paginas web - generar miniaturas para  youtube
-
-//Aplicacion web que te pide la url y ve todas las images y videos de tu pagina. deciendote el rendimiento que podes tener optimizandolas y ofriendote codigo con cloudinary para que el traslado de tus imagenes a cloudinary sea mas facil.
-
-//FECHA LIMITE 6 DE MARZO A LAS 23:59:59 CET
