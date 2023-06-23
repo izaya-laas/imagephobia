@@ -3,12 +3,12 @@ import Form from "./Form";
 import ImagesResponse from "./ImagesResponse";
 
 export default function WorkSection() {
-  const [responseData, useResponseData] = useState(null);
+  const [responseData, setResponseData] = useState(null);
 
   return (
     <article>
       <section>
-        <Form setResponse={useResponseData} />
+        <Form setResponse={setResponseData} />
       </section>
       {responseData && <ImagesResponse images={responseData} />}
     </article>
