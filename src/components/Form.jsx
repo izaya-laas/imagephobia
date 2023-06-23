@@ -42,6 +42,12 @@ export default function Form({ setResponse }) {
 
     if (responseValidation) {
       setError({ name: "The URL entered is not correct", status: 500 });
+
+      //Ojo
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+
       return;
     }
 
@@ -63,8 +69,8 @@ export default function Form({ setResponse }) {
       })
       .catch((err) => {
         console.log("ERROR");
+        
         const { statusText, status } = err;
-
         const error = { name: statusText, status };
 
         setError(error);
